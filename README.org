@@ -10,9 +10,9 @@ g++ -O3 -I eigen-3.3.9 -std=c++11 main_eigen.cpp -o diffusion_maps
 #+END_SRC
 
 ** Examples 
-Examples from the Coifman and Lafon paper (citation) below can be generated via the following commands. We use sklearn with the spectral embedding to compare against the un-weighted laplacian (which is equivalent to setting alpha to 0). Note that there are some differences from the paper due to unspecified settings
+An example or two from the Coifman and Lafon paper cited below can be generated via the following commands. We use sklearn with the spectral embedding to obtain the  un-weighted Laplacian comparison (we could also set epsilon to 0 in our code). Note that there are some differences from the paper due to unspecified settings
 1. The data generation process, including the base trajectory and the distribution of points, were guessed because this information was not provided in the paper
-2. The distribution of points is a beta along the trajectory -- again this was not provided
+2. The distribution of points follows a beta distribution along the trajectory -- again this was not provided
 3. The choice of epsilon was not provided, so here we use 0.1.
 4. The same qualitative facts are obtained as in the paper
 
@@ -23,18 +23,24 @@ python gendata.py circular-helix -u > chelix_example/chelix.dat
 python plotdata.py -e 0.1 chelix_example/chelix.dat chelix_example/chelix_coord.dat chelix_example/chelix.png
 #+END_SRC
 
-The resulting figure is shown below
-
 #+CAPTION: Circular helix example
 #+NAME:   fig:circ-helix
 [[chelix_example/chelix.png]]
 
 
 ** License
+
    GPL3
+
+This repo contains a copy of the [[https://eigen.tuxfamily.org/index.php?title=Main_Page][Eigen]] library, which is unmodified and has its own license. Only the python and main_eigen.cpp codes are licensed via GPL3 in this repo.
+
 ** About
-Author: Alex Gorodetsky
-Contact: alex@alexgorodetsky.com
+- Author ::  Alex Gorodetsky 
+- Contact :: alex@alexgorodetsky.com
+
 ** Acknowledgements
-This tool follows /Coifman, Ronald R., and Stéphane Lafon. "Diffusion maps." Applied and computational harmonic analysis 21.1 (2006): 5-30./
+
+This implementation is based on 
+
+ /Coifman, Ronald R., and Stéphane Lafon. "Diffusion maps." Applied and computational harmonic analysis 21.1 (2006): 5-30./
 

@@ -1,0 +1,40 @@
+* Diffusion Maps
+
+A simple diffusion map command line tool. Feed it input data, get out coordinates
+
+** Compile 
+
+Compile this code by running the following
+#+BEGIN_SRC shell
+g++ -O3 -I eigen-3.3.9 -std=c++11 main_eigen.cpp -o diffusion_maps
+#+END_SRC
+
+** Examples 
+Examples from the Coifman and Lafon paper (citation) below can be generated via the following commands. We use sklearn with the spectral embedding to compare against the un-weighted laplacian (which is equivalent to setting alpha to 0). Note that there are some differences from the paper due to unspecified settings
+1. The data generation process, including the base trajectory and the distribution of points, were guessed because this information was not provided in the paper
+2. The distribution of points is a beta along the trajectory -- again this was not provided
+3. The choice of epsilon was not provided, so here we use 0.1.
+4. The same qualitative facts are obtained as in the paper
+
+#+BEGIN_SRC shell
+mkdir chelix_example
+python gendata.py circular-helix -u > chelix_example/chelix.dat
+./diffusion_maps -e 0.1 -a 1 -n 4 -o chelix_example/chelix_coord.dat chelix_example/chelix.dat
+python plotdata.py -e 0.1 chelix_example/chelix.dat chelix_example/chelix_coord.dat chelix_example/chelix.png
+#+END_SRC
+
+The resulting figure is shown below
+
+#+CAPTION: Circular helix example
+#+NAME:   fig:circ-helix
+[[chelix_example/chelix.png]]
+
+
+** License
+   GPL3
+** About
+Author: Alex Gorodetsky
+Contact: alex@alexgorodetsky.com
+** Acknowledgements
+This tool follows /Coifman, Ronald R., and Stéphane Lafon. "Diffusion maps." Applied and computational harmonic analysis 21.1 (2006): 5-30./
+
